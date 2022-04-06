@@ -3,16 +3,16 @@
 namespace Cfuentessalgado\Todo;
 
 use Cfuentessalgado\Todo\Support\CommandRegistry;
-
+use Cfuentessalgado\Todo\Support\Configuration;
 
 class App
 {
-    protected string $driver;
     protected array $commands;
     protected array $args;
-    public function __construct($driver = 'json')
+    protected Configuration $config;
+    public function __construct($driver = 'serialize')
     {
-        $this->driver = $driver;
+        $this->config = new Configuration($driver);
     }
 
     public function run()
@@ -32,8 +32,8 @@ class App
     {
         $commandName = $this->args[1];
 
-        $command = new $this->commands[$commandName]();
-        $command->handle();
+        $command = new $this->commands[$commandName]($this->config);
+        $command->handle($this->args);
     }
 
     protected function registerCommands()

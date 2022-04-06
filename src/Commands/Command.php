@@ -2,8 +2,14 @@
 
 namespace Cfuentessalgado\Todo\Commands;
 
+use Cfuentessalgado\Todo\Support\Configuration;
 
-interface Command
+abstract class Command
 {
-    public function handle();
+    protected Configuration $config;
+    public function __construct(Configuration $config)
+    {
+        $this->config = $config;
+    }
+    abstract public function handle(array $args);
 }
