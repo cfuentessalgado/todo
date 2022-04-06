@@ -1,5 +1,11 @@
 #!/usr/bin/env php
 <?php
 
+use Cfuentessalgado\Todo\App;
 
-echo "todo";
+require_once dirname(__DIR__).'/vendor/autoload.php';
+
+
+
+$app = new App();
+$app->run();
