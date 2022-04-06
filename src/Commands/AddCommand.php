@@ -3,19 +3,18 @@
 namespace Cfuentessalgado\Todo\Commands;
 
 use Cfuentessalgado\Todo\Commands\Command;
+use Cfuentessalgado\Todo\Models\Todo;
 
 class AddCommand extends Command
 {
 
     public function handle(array $args)
     {
-        $todolist = unserialize(file_get_contents($this->config->destination));
+        $todolist = $this->parser->parse();
+        $text  = $args[2];
+        $todo = new Todo($text, Todo::PENDING);
+        $todolist->add($todo);
 
-        if (!$todolist) {
-            $todolist = [];
-        }
-        $todolist[] = $args[2];
-
-        file_put_contents($this->config->destination, serialize($todolist));
+        $this->parser->write($todolist);
     }
 }

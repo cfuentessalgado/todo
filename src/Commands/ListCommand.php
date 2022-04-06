@@ -9,14 +9,10 @@ class ListCommand extends Command
 
     public function handle(array $args)
     {
-        $todolist = unserialize(file_get_contents($this->config->destination));
-
-        if (!$todolist) {
-            return;
-        }
+        $todolist = $this->parser->parse($this->config);
 
         foreach($todolist as $todo) {
-            echo $todo.PHP_EOL;
+            echo '['.$todo->getId(). '] '.$todo->text.PHP_EOL;
         }
     }
 }
