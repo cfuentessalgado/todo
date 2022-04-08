@@ -11,7 +11,7 @@ class AddCommand extends Command
     public function handle(array $args)
     {
         $todolist = $this->parser->parse();
-        $text  = $args[2];
+        $text  = implode(' ', array_slice($args, 2));
         $todo = new Todo($text, Todo::PENDING);
         $todolist->add($todo);
 
