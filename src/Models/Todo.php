@@ -26,4 +26,9 @@ class Todo
     {
         return $this->id;
     }
+
+    public function complete()
+    {
+        $this->done = true;
+    }
 }

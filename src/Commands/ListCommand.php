@@ -11,9 +11,11 @@ class ListCommand extends Command
     {
         $todolist = $this->parser->parse($this->config);
 
-        foreach($todolist as $todo) {
-            echo '['.$todo->getId(). '] '.$todo->text.PHP_EOL;
+        foreach ($todolist as $todo) {
+            if ($todo->done) {
+                continue;
+            }
+            echo '[' . $todo->getId() . '] ' . $todo->text . PHP_EOL;
         }
     }
 }
-

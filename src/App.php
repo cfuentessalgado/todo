@@ -30,6 +30,9 @@ class App
 
     protected function handleArgs()
     {
+        if(sizeof($this->args) < 2) {
+            return;
+        }
         $commandName = $this->args[1];
 
         $command = new $this->commands[$commandName]($this->config);
