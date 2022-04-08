@@ -3,7 +3,14 @@
 
 use Cfuentessalgado\Todo\App;
 
-require_once dirname(__DIR__).'/vendor/autoload.php';
+if (file_exists($localDir = dirname(__DIR__) . '/vendor/autoload.php')) {
+    echo $localDir;
+    require_once $localDir;
+}
+
+if (file_exists($globalDir = getenv('HOME') . '/.composer/vendor/autoload.php')) {
+    require_once $globalDir;
+}
 
 
 
